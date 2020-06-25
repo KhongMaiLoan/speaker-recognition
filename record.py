@@ -12,7 +12,7 @@ import os
 
 
 
-username = "abc"
+username = "Abc"
 filename = 'trainingData/'
 chunk = 1024
 FORMAT = pyaudio.paInt16
@@ -34,33 +34,34 @@ all = []
 
 
 def on_press(key):
-    global index
-    
-    if key == keyboard.Key.esc:
-        stream.close()
-        p.terminate()
-        return False  # stop listener
-    try:
-        k = key.char  # single-char keys
-    except:
-        k = key.name  # other keys
+    index = 1
+    while index != 4:
+        if key == keyboard.Key.esc:
+            stream.close()
+            p.terminate()
+            return False  # stop listener
+        try:
+            k = key.char  # single-char keys
+        except:
+            k = key.name  # other keys
 
-    if k in ['s']:
-        print('Key pressed: ' + k)
-        data = stream.read(chunk) # Record data
-        all.append(data)
+        if k in ['s']:
+            print('Key pressed: ' + k)
+            data = stream.read(chunk) # Record data
+            all.append(data)
 
-    if k in ['q']:
-        print('Key pressed: ' + k)
-        
-        data = b''.join(all)
-        filewavname = filename+"/"+str(username) + '.wav'
-        wf = wave.open(filewavname, 'wb')
-        wf.setnchannels(CHANNELS)
-        wf.setsampwidth(p.get_sample_size(FORMAT))
-        wf.setframerate(RATE)
-        wf.writeframes(data)
-        wf.close()
+        if k in ['q']:
+            print('Key pressed: ' + k)
+            
+            data = b''.join(all)
+            filewavname = filename+"/"+str(username)+'/' +str(index) + '.wav'
+            wf = wave.open(filewavname, 'wb')
+            wf.setnchannels(CHANNELS)
+            wf.setsampwidth(p.get_sample_size(FORMAT))
+            wf.setframerate(RATE)
+            wf.writeframes(data)
+            wf.close()
+            index = index+1
 
 
 listener = keyboard.Listener(on_press=on_press)

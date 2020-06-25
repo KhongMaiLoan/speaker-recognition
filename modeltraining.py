@@ -47,7 +47,9 @@ for path in file_paths:
         
         # dumping the trained gaussian model
         picklefile = path.split("-")[0]+".gmm"
-        pickle.dump(gmm,open(dest + picklefile,'w'))
+        #pickle.dump(gmm,open(dest + picklefile,'wb'))
+        with open(dest + picklefile,'wb') as file:
+            pickle.dump(gmm, file)
         print ('+ modeling completed for speaker:',picklefile," with data point = ",features.shape)
         features = np.asarray(())
         count = 0
