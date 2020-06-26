@@ -46,7 +46,7 @@ for path in file_paths:
         gmm.fit(features)
         
         # dumping the trained gaussian model
-        picklefile = path.split("-")[0]+".gmm"
+        picklefile = path.split("/")[0]+".gmm"
         #pickle.dump(gmm,open(dest + picklefile,'wb'))
         with open(dest + picklefile,'wb') as file:
             pickle.dump(gmm, file)

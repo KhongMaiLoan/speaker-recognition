@@ -16,11 +16,6 @@ modelpath = "Speakers_models/"
 gmm_files = [os.path.join(modelpath,fname) for fname in 
               os.listdir(modelpath) if fname.endswith('.gmm')]
 
-# model_names = []
-# for (paths, dirs, files) in os.walk("./"):
-#     for filename in files:
-#         if filename.endswith(".pkl"):
-#             model_names.append(filename)
 
 			
 models = [pickle.load(open(fname,'rb')) for fname in gmm_files]
